@@ -187,4 +187,92 @@ const styles = StyleSheet.create({
   },
 });
 
-export default bai2
+function bai3(){
+  const [location, setLocation] = useState({
+    marginLeft: new Animated.Value(10),
+    marginTop: new Animated.Value(10)
+  })
+
+  let x1 = Math.floor(Math.random() * 700 ) + 1
+  let x2 = Math.floor(Math.random() * 700 ) + 1
+  let x3 = Math.floor(Math.random() * 700 ) + 1
+  
+  let y1 = Math.floor(Math.random() * 300 ) + 1
+  let y2 = Math.floor(Math.random() * 300 ) + 1
+  let y3 = Math.floor(Math.random() * 300 ) + 1
+  
+  const[location1, setLocation1] = useState({
+    marginLeft1: new Animated.Value(10),
+    marginTop1: new Animated.Value(10)
+  })
+  
+  const[location2, setLocation2] = useState({
+    marginLeft2: new Animated.Value(10),
+    marginTop2: new Animated.Value(10)
+  })
+
+  const[location3, setLocation3] = useState({
+    marginLeft3: new Animated.Value(10),
+    marginTop3: new Animated.Value(10)
+  })
+
+  function onPress(event){
+    var x = event.nativeEvent.locationX
+
+    var y = event.nativeEvent.locationY
+
+    setLocation({
+      x: x,
+      y: y,
+      marginLeft: x - 30,
+      marginTop: y - 30
+    })
+  }
+  function onMove(event){
+    var x = event.nativeEvent.locationX
+    var y = event.nativeEvent.locationY
+
+    setLocation({marginLeft: x - 30, marginTop:y - 30})
+  }
+
+  const {marginTop, marginLeft} = location
+  const {marginTop1, marginLeft1} = location1
+  const {marginTop2, marginLeft2} = location2
+  const {marginTop3, marginLeft3} = location3
+  
+  return(
+    <View style={styles.container}
+      onStartShouldSetResponder={() => true}
+      onMoveShouldSetResponder={() => true}
+      onResponderGrant={onPress}
+      // onResponderMove={onMove}
+      // onResponderRelease={onRelease}
+      >
+      <Animated.Image
+          source={oggy}
+          style={{transition: '0.5s', marginLeft:marginLeft, marginTop:marginTop, height:100, width:100}}>
+      </Animated.Image>
+        
+      <Animated.Image
+          source={jerry}
+          onResponderGrant={onPress}
+          onResponderMove={onMove}
+          style={{transition: '0.5s', marginLeft:marginLeft1, marginTop:marginTop1, height:100, width:100}}>
+      </Animated.Image>
+      <Animated.Image
+          source={jerry}
+          onResponderGrant={onPress}
+          onResponderMove={onMove}
+          style={{transition: '0.5s', marginLeft:marginLeft2, marginTop:marginTop2, height:100, width:100}}>
+      </Animated.Image>
+      <Animated.Image
+          source={jerry}
+          onResponderGrant={onPress}
+          onResponderMove={onMove}
+          style={{transition: '0.5s', marginLeft:marginLeft3, marginTop:marginTop3, height:100, width:100}}>
+      </Animated.Image>
+    </View>
+  )
+}
+
+export default bai3
